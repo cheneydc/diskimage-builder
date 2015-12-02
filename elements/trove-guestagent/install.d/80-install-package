@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Copyright @ cheneydc 
+# Date  : 2015-12-02
+# Author: cheneydc
+# Email : <cheneydc@gmail.com>
+#
+# Distributed under terms of the MIT license.
+
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5EDB1B62EC4926EA
+apt-get update && apt-get -y install trove-guestagent

@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# Copyright @ cheneydc 
+# Date  : 2015-12-02
+# Author: cheneydc
+# Email : <cheneydc@gmail.com>
+#
+# Distributed under terms of the MIT license.
+set -e
+set -o xtrace
+
+TEMPFILE=`mktemp`
+echo "${TROVE_USER} ALL=(ALL) NOPASSWD:ALL" > $TEMPFILE
+chmod 0440 $TEMPFILE
+sudo chown root:root $TEMPFILE
+sudo mv $TEMPFILE /etc/sudoers.d/70_trove_guest

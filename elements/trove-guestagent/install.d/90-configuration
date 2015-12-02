@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Copyright @ cheneydc 
+# Date  : 2015-12-02
+# Author: cheneydc
+# Email : <cheneydc@gmail.com>
+#
+# Distributed under terms of the MIT license.
+
+[ -n "${NOVA_PROXY_ADMIN_USER}" ] || die "NOVA_PROXY_ADMIN_USER needs to be set for the guest image"
+[ -n "${NOVA_PROXY_ADMIN_PASS}" ] || die "NOVA_PROXY_ADMIN_PASS needs to be set for the guest image"
+[ -n "${NOVA_PROXY_ADMIN_TENANT_NAME}" ] || die "NOVA_PROXY_ADMIN_TENANT_NAME needs to be set for the guest image"
+[ -n "${TROVE_AUTH_URL}" ] || die "TROVE_AUTH_URL needs to be set for the guest image"
+[ -n "${RABBIT_HOST}" ] || die "RABBIT_HOST needs to be set for the guest image"
+[ -n "${RABBIT_USERID}" ] || die "RABBIT_USERID needs to be set for the guest image"
+[ -n "${RABBIT_PASSWD}" ] || die "RABBIT_PASSWD needs to be set for the guest image"
+[ -n "${RABBIT_VIRTUAL_HOST}" ] || die "RABBIT_VIRTUAL_HOST needs to be set for the guest image"
+
+TROVE_AGENT_CONF="/etc/trove/trove-guestagent.conf"
+TROVE_CONF="/etc/trove/trove.conf"
+
+sed "/DEFAULT/a\\nova_proxy_admin_user=${NOVA_PROXY_ADMIN_USER}" -i ${TROVE_AGENT_CONF}
+sed "/DEFAULT/a\\nova_proxy_admin_pass=${NOVA_PROXY_ADMIN_PASS}" -i ${TROVE_AGENT_CONF}
+sed "/DEFAULT/a\\nova_proxy_admin_tenant_name=${NOVA_PROXY_ADMIN_TENANT_NAME}" -i ${TROVE_AGENT_CONF}
+
+sed "/DEFAULT/a\\datastore_manager=mysql" -i ${TROVE_AGENT_CONF}
+
+sed "s/^.*trove_auth_url.*$/trove_auth_url=${TROVE_AUTH_URL}/" -i ${TROVE_AGENT_CONF}
+sed "s/^.*rabbit_host.*$/rabbit_host=${RABBIT_HOST}/" -i ${TROVE_AGENT_CONF}
+sed "s/^.*rabbit_password.*$/rabbit_password=${RABBIT_PASSWD}/" -i ${TROVE_AGENT_CONF}
+sed "s/^.*rabbit_userid.*$/rabbit_userid=${RABBIT_USERID}/" -i ${TROVE_AGENT_CONF}
+sed "s/^.*rabbit_virtual_host.*$/rabbit_virtual_host=${RABBIT_VIRTUAL_HOST}/" -i ${TROVE_AGENT_CONF}
+
+rm -rf /etc/init/trove-guest.conf
+sed "s/trove.conf/trove-guestagent.conf/" -i /etc/init/trove-guestagent.conf
+chown ${TROVE_USER}:${TROVE_USER} /etc/trove/conf.d/guest_info.conf
+sed "s/-- --/-- --config-file=\/etc\/trove\/conf.d\/guest_info.conf --/" -i /etc/init/trove-guestagent.conf

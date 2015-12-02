@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Copyright @ cheneydc 
+# Date  : 2015-12-02
+# Author: cheneydc
+# Email : <cheneydc@gmail.com>
+#
+# Distributed under terms of the MIT license.
+
+REPO_URL="deb http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/${RELEASE} main"
+REPO_FILE="/etc/apt/sources.list.d/cloudarchive-${RELEASE}.list"
+
+echo ${REPO_URL} >> ${REPO_FILE} 
+

@@ -1,0 +1,52 @@
+#!/bin/bash
+#
+# Copyright @ cheneydc 
+# Date  : 2015-12-02
+# Author: cheneydc
+# Email : <cheneydc@gmail.com>
+#
+# Distributed under terms of the MIT license.
+
+export DATABASE_TYPE="" 
+
+if [ $# -eq 0 ]
+then
+    echo "ERROR: Must specify a database type."
+    echo "       Get support database types with -h."
+    exit 1
+fi
+
+if [ $# -eq 1 ] && [ $1 == "-h" ]
+then 
+    echo "usage: get help    ./$(basename $0) -h"
+    echo "       make image  ./$(basename $0) [mysql|percona|]"
+    exit 0
+fi
+
+if [ $# -eq 1 ]
+then
+    DATABASE_TYPE=$1
+fi
+
+# Get tripleO image code
+export TRIPLEO_IMAGE_ELEMENTS_GIT=https://github.com/openstack/tripleo-image-elements.git
+export TRIPLEO_CLONE_DIR="/tmp/tripleo_image_elements/"
+git clone ${TRIPLEO_IMAGE_ELEMENTS_GIT} -b master ${TRIPLEO_CLONE_DIR} 
+
+# Get trove integration code
+export TROVE_INTEGRATION_GIT=https://github.com/cheneydc/trove-integration.git
+export TROVE_CLONE_DIR="/tmp/trove_integration/"
+git clone ${TROVE_INTEGRATION_GIT} -b master ${TROVE_CLONE_DIR}
+
+source trove_env 
+
+# execute to make image
+disk-image-create -a amd64 -o $(basename $0) \
+                  ubuntu \
+                  vm \
+                  heat-cfntools \
+                  cloud-init-datasources \
+                  ubuntu-guest \
+                  ubuntu-${DATABASE_TYPE} \
+                  trove-guestagent \
+                  | tee /tmp/$(basename $0).log
