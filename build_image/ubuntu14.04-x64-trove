@@ -18,8 +18,8 @@ fi
 
 if [ $# -eq 1 ] && [ $1 == "-h" ]
 then 
-    echo "usage: get help    ./$(basename $0) -h"
-    echo "       make image  ./$(basename $0) [mysql|percona|]"
+    echo "usage: get help     ./$(basename $0) -h"
+    echo "       build image  ./$(basename $0) [mysql|percona|pxc]"
     exit 0
 fi
 
