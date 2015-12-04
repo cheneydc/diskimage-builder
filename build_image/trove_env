@@ -8,27 +8,27 @@
 # Distributed under terms of the MIT license.
 
 # Define env
-export NOVA_PROXY_ADMIN_USER="admin"
-export NOVA_PROXY_ADMIN_PASS="Neunn@123"
-export NOVA_PROXY_ADMIN_TENANT_NAME="admin"
-export TROVE_AUTH_URL="http:\/\/192.168.250.7:35357\/v2.0"
-export RABBIT_HOST="192.168.250.31"
-export RABBIT_PASSWD="openstack"
-export RABBIT_USERID="openstack"
-export RABBIT_VIRTUAL_HOST="\/"
+export NOVA_PROXY_ADMIN_USER=""
+export NOVA_PROXY_ADMIN_PASS=""
+export NOVA_PROXY_ADMIN_TENANT_NAME=""
+export TROVE_AUTH_URL=""
+export RABBIT_HOST=""
+export RABBIT_PASSWD=""
+export RABBIT_USERID=""
+export RABBIT_VIRTUAL_HOST=""
 
-export HOST_USERNAME="ubuntu"
-export HOST_SCP_USERNAME="ubuntu"
-export RELEASE="liberty"
+export HOST_USERNAME=""
+export HOST_SCP_USERNAME=""
+export RELEASE=""
 export PROJECT_BRANCH='stable/${RELEASE}'
-export GUEST_USERNAME="ubuntu"
+export GUEST_USERNAME=""
 export TROVE_USER="trove"
 export RELEASE="trusty"
-export NETWORK_GATEWAY="192.168.99.1"
+export NETWORK_GATEWAY=""
 export SERVICE_TYPE=${DATABASE_TYPE}
-export ESCAPED_PATH_TROVE="\/opt\/stack\/trove"
-export SSH_DIR="/home/ubuntu/.ssh"
-export ESCAPED_GUEST_LOGDIR="\/opt\/stack\/logs"
+export ESCAPED_PATH_TROVE=""
+export SSH_DIR=""
+export ESCAPED_GUEST_LOGDIR=""
 export PATH_TRIPLEO_ELEMENTS=${TRIPLEO_CLONE_DIR}
 export REDSTACK_SCRIPTS=${TROVE_CLONE_DIR}/scripts
 export ELEMENTS_PATH=$REDSTACK_SCRIPTS/files/elements:$PATH_TRIPLEO_ELEMENTS/elements
