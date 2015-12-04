@@ -83,4 +83,4 @@ EOF
 chmod 0644 ${MYSQL_TEMP}
 sudo chown root:root ${MYSQL_TEMP}
 sudo mv ${MYSQL_TEMP} /etc/init/mysql.conf
-
+fi
