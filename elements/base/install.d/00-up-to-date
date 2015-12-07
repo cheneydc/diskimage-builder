@@ -8,4 +8,7 @@ fi
 set -eu
 set -o pipefail
 
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5EDB1B62EC4926EA
+apt-key update & apt-get update 
+
 install-packages -u

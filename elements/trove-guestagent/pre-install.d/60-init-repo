@@ -7,8 +7,9 @@
 #
 # Distributed under terms of the MIT license.
 
-REPO_URL="deb http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/${RELEASE} main"
-REPO_FILE="/etc/apt/sources.list.d/cloudarchive-${RELEASE}.list"
+REPO_URL="deb http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/${CLOUD_RELEASE} main"
+REPO_FILE="/etc/apt/sources.list.d/cloudarchive-${CLOUD_RELEASE}.list"
 
 echo ${REPO_URL} >> ${REPO_FILE} 
 
+sudo apt-key update && sudo apt-get update
